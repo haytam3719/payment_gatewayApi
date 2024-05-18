@@ -20,7 +20,7 @@ def home():
 
 @app.route('/biller/bills', methods=['POST'])
 def receive_bills_data():
-    url = "https://biller-api.onrender.com/bills"
+    url = "https://biller-api-r47y.onrender.com/bills"
     response = requests.get(url)
     if response.status_code == 200:
         bills_data = response.json()
@@ -35,7 +35,7 @@ def request_payment():
     bill_id = data.get("id")
     amount = data.get("amount")
     headers = {'Content-Type': 'application/json'}
-    biller_api_url = 'https://biller-api.onrender.com/approve_payment_request'  
+    biller_api_url = 'https://biller-api-r47y.onrender.com/approve_payment_request'  
     payload = {"id": bill_id, "amount": amount}
     print(payload)
     response = requests.post(biller_api_url, json=payload, headers=headers)
@@ -162,7 +162,7 @@ def make_payment():
                 headers = {'content-type': 'application/json'}
                 payment_id = result.body.get('payment', {}).get('id')
                 print(json.dumps({"payment_id": payment_id}))
-                response = requests.post("https://biller-api.onrender.com/payment", json={"bill_id": bill_id, "payment_id": payment_id}, headers=headers)
+                response = requests.post("https://biller-api-r47y.onrender.com/payment", json={"bill_id": bill_id, "payment_id": payment_id}, headers=headers)
                 print(response.headers)
                 return redirect(url_for('merchant_approval', bill_id=bill_id, payment_id=payment_id, _external=True))
             elif result.is_error():
