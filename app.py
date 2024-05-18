@@ -52,7 +52,7 @@ temp_data_storage = {}
 # Square API credentials
 CLIENT_ID = 'sandbox-sq0idb-P4f2pTP0-adoQ9zw2oPPpw'
 CLIENT_SECRET = 'sandbox-sq0csb-1zNfHrdCVz79YrCuw5WA8M4N4VoMiP7Sjw6nOoWJ6Jw'
-REDIRECT_URI = 'https://b69f-196-64-12-157.ngrok-free.app/square_oauth_callback'
+REDIRECT_URI = 'https://payment-gatewayapi.onrender.com/square_oauth_callback'
 AUTHORIZE_URL = 'https://connect.squareupsandbox.com/oauth2/authorize'
 TOKEN_URL = 'https://connect.squareupsandbox.com/oauth2/token'
 
