@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.DEBUG,
 
 app = Flask(__name__)
 
-request_id = None 
+request_id = None
 
 @app.route('/')
 def home():
@@ -35,7 +35,7 @@ def request_payment():
     bill_id = data.get("id")
     amount = data.get("amount")
     headers = {'Content-Type': 'application/json'}
-    biller_api_url = 'https://biller-api-r47y.onrender.com/approve_payment_request'  
+    biller_api_url = 'https://biller-api-r47y.onrender.com/approve_payment_request'
     payload = {"id": bill_id, "amount": amount}
     print(payload)
     response = requests.post(biller_api_url, json=payload, headers=headers)
@@ -91,7 +91,7 @@ def square_oauth_callback():
             for line in file:
                 stored_request_id, bill_id, amount = line.strip().split(',')
                 logging.debug("Values from file: stored_request_id=%s, bill_id=%s, amount=%s", stored_request_id, bill_id, amount)
-                break  
+                break
     except Exception as e:
         logging.error("Error reading from file: %s", e)
     logging.debug("Values after reading from file: stored_request_id=%s, bill_id=%s, amount=%s", stored_request_id, bill_id, amount)
@@ -110,7 +110,7 @@ def square_oauth_callback():
             access_token = token_data['access_token']
             access_token_storage[code] = access_token
             redirect_url = url_for('make_payment', code=code, _external=True)
-            return redirect(redirect_url)        
+            return redirect(redirect_url)
         else:
             if token_data.get('error') == 'INVALID_SCOPE':
                 missing_capabilities = token_data.get('error_description', '').split(': ')[-1]
@@ -131,7 +131,7 @@ def make_payment():
             for line in file:
                 stored_request_id, bill_id, amount = line.strip().split(',')
                 logging.debug("Values from file: stored_request_id=%s, bill_id=%s, amount=%s", stored_request_id, bill_id, amount)
-                break  
+                break
     except Exception as e:
         logging.error("Error reading from file: %s", e)
     logging.debug("Values after reading from file: stored_request_id=%s, bill_id=%s, amount=%s", stored_request_id, bill_id, amount)
@@ -152,8 +152,8 @@ def make_payment():
             "idempotency_key": idempotency_key,
             "location_id": sandbox_location_id,
             "amount_money": {
-                "amount": int(amount)*100,  
-                "currency": "USD"  
+                "amount": int(amount) * 100,
+                "currency": "USD"
             }
         }
         try:
